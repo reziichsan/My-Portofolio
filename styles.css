@@ -697,4 +697,8 @@ nav {
   }
 }
 
+a {
+  color: #ec9956;   /* ganti warna sesuai keinginan */
+  text-decoration: none;
+}
 
