@@ -11,8 +11,8 @@
     :root {
       --bg:          #09090f;
       --bg-alt:      #0f0f18;
-      --surface:     rgba(255,255,255,0.04);
-      --surface-h:   rgba(255,255,255,0.07);
+      --surface:      rgba(255,255,255,0.04);
+      --surface-h:    rgba(255,255,255,0.07);
       --border:      rgba(255,255,255,0.08);
       --border-h:    rgba(209,163,102,0.35);
       --gold:        #d1a366;
@@ -238,6 +238,13 @@
       animation: pulse 2s infinite;
       flex-shrink: 0;
     }
+    @media (max-width: 820px) {
+      .hero-available, .hero-sub, .hero-btns, .hero-stats { margin-inline: auto; }
+      .hero-btns { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-img-wrap { order: -1; }
+      .hero-img-inner { width: min(280px, 80%); }
+    }
     @keyframes pulse {
       0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.5); }
       50%      { box-shadow: 0 0 0 7px rgba(74,222,128,0); }
@@ -360,11 +367,6 @@
         gap: 2.5rem;
         padding-top: calc(var(--nav-h) + 2.5rem);
       }
-      .hero-available, .hero-sub, .hero-btns, .hero-stats { margin-inline: auto; }
-      .hero-btns { justify-content: center; }
-      .hero-stats { justify-content: center; }
-      .hero-img-wrap { order: -1; }
-      .hero-img-inner { width: min(280px, 80%); }
     }
 
     /* ── SECTION WRAPPER ─────────────────────────────── */
@@ -786,7 +788,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 0.98rem;
       font-weight: 600;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.3---;
       line-height: 1.35;
     }
     .ccard-body p {
@@ -904,19 +906,19 @@
       </div>
       <h1 class="hero-title reveal">
         Hi, I'm <span class="name">Rezi Ichsan</span>
-        <span class="role">Aspiring IT Support & UI/UX Enthusiast</span>
+        <span class="role">Informatics Specialist | IT Support & UI/UX Design Enthusiast</span>
       </h1>
       <p class="hero-sub reveal">
-        Crafting intuitive, user-centered interfaces — from research and wireframes to pixel-perfect prototypes. Currently studying Informatics at Telkom University.
+        Result-oriented Informatics student with hands-on experience in IT support, user experience design, server optimization, and data-driven AI frameworks[cite: 2, 3].
       </p>
       <div class="hero-btns reveal">
         <a href="#projects" class="btn btn-primary">View Projects <i class="ri-arrow-right-line"></i></a>
-        <a href="CV ATS.png" class="btn btn-outline" download>Download CV <i class="ri-download-2-line"></i></a>
+        <a href="Resume_Rezi_Ichsannur_Arsyi.pdf" class="btn btn-outline" download>Download CV <i class="ri-download-2-line"></i></a>
       </div>
       <div class="hero-stats reveal">
         <div class="hero-stat">
-          <strong>3+</strong>
-          <span>Projects</span>
+          <strong>4+</strong>
+          <span>Key Projects</span>
         </div>
         <div class="stat-sep"></div>
         <div class="hero-stat">
@@ -925,7 +927,7 @@
         </div>
         <div class="stat-sep"></div>
         <div class="hero-stat">
-          <strong>3+</strong>
+          <strong>4</strong>
           <span>Certificates</span>
         </div>
       </div>
@@ -935,10 +937,10 @@
         <div class="hero-img-glow"></div>
         <img src="assets/header.jpg" alt="Rezi Ichsannur Arsyi"/>
         <div class="hero-img-badge">
-          <i class="ri-figma-line"></i> Fresh Graduate
+          <i class="ri-computer-line"></i> Tech Specialist
         </div>
         <div class="hero-img-ring">
-          <i class="ri-palette-line"></i>
+          <i class="ri-code-line"></i>
         </div>
       </div>
     </div>
@@ -956,18 +958,19 @@
         </div>
         <div class="about-text reveal">
           <p class="eyebrow">About Me</p>
-          <h2 class="section-title">Designing <em>experiences</em><br>that matter</h2>
-          <p>I'm an undergraduate Informatics student at <strong>Telkom University</strong>, passionate about UI/UX design. I focus on creating intuitive, visually compelling applications that genuinely serve users.</p>
-          <p>Proficient in <strong>Figma</strong>, with hands-on experience in Python (Django), HTML, and CSS. I completed an internship as a Software Engineer at <strong>Nutrifood</strong>, contributing to internal tools used across teams.</p>
+          <h2 class="section-title">Bridging <em>technology</em><br>and user experience</h2>
+          <p>I'm an undergraduate Informatics student at <strong>Telkom University</strong> specializing in corporate IT systems, server architecture, and interface systems[cite: 1, 3]. I focus on developing clean infrastructure while maintaining a user-focused approach to technical executions[cite: 1, 3].</p>
+          <p>Proven capability managing multiplayer server environments for <strong>1,000+ concurrent users</strong>[cite: 1, 3] and implementing NLP machine learning projects with a peak validation accuracy of <strong>88.62%</strong>[cite: 2, 3]. Proficient in Figma, system deployments, network routing setups, and enterprise application testing workflows[cite: 1, 3].</p>
           <div class="about-chips">
-            <span>User Research</span>
-            <span>Wireframing</span>
-            <span>Prototyping</span>
-            <span>Visual Design</span>
-            <span>Django</span>
+            <span>IT Troubleshooting</span>
+            <span>Network Security</span>
+            <span>User Management</span>
+            <span>UI/UX Prototyping</span>
             <span>Figma</span>
+            <span>Python &amp; Django</span>
+            <span>Machine Learning</span>
           </div>
-          <a href="CV ATS.png" class="btn btn-primary" download>Download CV <i class="ri-download-2-line"></i></a>
+          <a href="Resume_Rezi_Ichsannur_Arsyi.pdf" class="btn btn-primary" download>Download CV <i class="ri-download-2-line"></i></a>
         </div>
       </div>
     </div>
@@ -994,11 +997,11 @@
               <div class="tl-dot"><i class="ri-code-s-slash-line"></i></div>
               <div class="tl-card">
                 <span class="tl-date">Jul 2022 — Sep 2022</span>
-                <h3>Software Engineer Intern</h3>
-                <p class="tl-company"><i class="ri-building-line"></i> Nutrifood · Bandung, Indonesia</p>
-                <p class="tl-desc">Contributed to an internal application using Django. Responsible for features related to uploading, deleting, and managing video content on the platform.</p>
+                <h3>Web Developer Intern</h3>
+                <p class="tl-company"><i class="ri-building-line"></i> Nutrifood Indonesia · Remote Internship</p>
+                <p class="tl-desc">Collaborated in developing an Enterprise Social Media Monitoring System using Django[cite: 1, 3]. Engineered Digital Meeting management features, implemented custom CRUD functions, search endpoints, and structured local environment staging[cite: 1, 3].</p>
                 <div class="tl-tags">
-                  <span>Python</span><span>Django</span><span>Backend</span>
+                  <span>Python</span><span>Django</span><span>CRUD Systems</span><span>Technical Support</span>
                 </div>
               </div>
             </div>
@@ -1017,11 +1020,11 @@
               <div class="tl-dot"><i class="ri-book-open-line"></i></div>
               <div class="tl-card">
                 <span class="tl-date">Aug 2019 — Aug 2026</span>
-                <h3>S1 Informatika</h3>
+                <h3>Bachelor's Degree in Informatics</h3>
                 <p class="tl-company"><i class="ri-map-pin-line"></i> Telkom University · Bandung, Indonesia</p>
-                <p class="tl-desc">Expected graduate at August 2026 degree in Informatics with a focus on software engineering and UI/UX design. Actively involved in design-related coursework and projects.</p>
+                <p class="tl-desc">Comprehensive coursework in network architecture, mobile framework engineering, database management systems, OOP, cybersecurity architectures, and project workflows[cite: 1, 3].</p>
                 <div class="tl-tags">
-                  <span>GPA 2.99 / 4.0</span><span>Informatika</span><span>S1</span>
+                  <span>GPA 2.99 / 4.0</span><span>Informatics</span><span>Telkom University</span>
                 </div>
               </div>
             </div>
@@ -1037,43 +1040,45 @@
     <div class="container">
       <div class="sec-head centered reveal">
         <p class="eyebrow">Capabilities</p>
-        <h2 class="section-title">My Skills</h2>
+        <h2 class="section-title">Technical Mastery</h2>
       </div>
       <div class="softskills-row reveal">
-        <span>Teamwork</span>
-        <span>Communication</span>
-        <span>Problem Solving</span>
-        <span>Creativity</span>
-        <span>Adaptability</span>
-        <span>Time Management</span>
+        <span>Analytical Troubleshooting</span>
+        <span>Systems Automation</span>
+        <span>Cross-functional Teamwork</span>
+        <span>Honesty &amp; Transparency</span>
+        <span>Proactive Inquiries</span>
+        <span>Productive Time Management</span>
       </div>
       <div class="skills-grid">
         <div class="skill-card reveal">
-          <div class="skill-icon"><i class="ri-window-fill"></i></div>
-          <h4>UI/UX Design</h4>
+          <div class="skill-icon"><i class="ri-computer-line"></i></div>
+          <h4>IT Helpdesk &amp; Systems</h4>
           <ul>
-            <li>Wireframing &amp; Prototyping (Figma)</li>
-            <li>User Flow Design</li>
-            <li>Usability Testing &amp; Research</li>
-            <li>Visual Design</li>
+            <li>Hardware Deployment (PC, Laptop, Printers)</li>
+            <li>OS Provisioning (Windows / macOS / Linux)</li>
+            <li>User Directory Access Configurations</li>
+            <li>Routine Data Backup &amp; Recovery Cycles</li>
           </ul>
         </div>
         <div class="skill-card reveal">
-          <div class="skill-icon"><i class="ri-code-line"></i></div>
-          <h4>Development</h4>
+          <div class="skill-icon"><i class="ri-router-line"></i></div>
+          <h4>Network &amp; Security</h4>
           <ul>
-            <li>Python &amp; Django</li>
-            <li>HTML &amp; CSS</li>
-            <li>JavaScript (Basic)</li>
+            <li>Basic Networking (TCP/IP, LAN, Wi-Fi architectures)</li>
+            <li>VLAN &amp; Switch Port Security Parameters</li>
+            <li>Real-time Connectivity Performance Monitoring</li>
+            <li>Basic Threat Remediation (Antivirus / Anti-phishing)</li>
           </ul>
         </div>
         <div class="skill-card reveal">
-          <div class="skill-icon"><i class="ri-tools-line"></i></div>
-          <h4>Tools</h4>
+          <div class="skill-icon"><i class="ri-figma-line"></i></div>
+          <h4>UI/UX &amp; Computation</h4>
           <ul>
-            <li>Figma</li>
-            <li>Adobe Photoshop</li>
-            <li>Basic Data Analysis</li>
+            <li>High-fidelity Prototyping (Figma Design Systems)</li>
+            <li>Information Architecture &amp; User Flows</li>
+            <li>Python &amp; Django Framework Architecture</li>
+            <li>Automated Data Processing (Advanced MS Excel)</li>
           </ul>
         </div>
       </div>
@@ -1084,53 +1089,53 @@
   <section class="section" id="projects">
     <div class="container">
       <div class="sec-head centered reveal">
-        <p class="eyebrow">Work</p>
-        <h2 class="section-title">Selected Projects</h2>
-        <p class="section-desc">Designing intuitive, engaging interfaces focused on usability and visual balance.</p>
+        <p class="eyebrow">Selected Works</p>
+        <h2 class="section-title">System Implementations</h2>
+        <p class="section-desc">Engineering stable network server frameworks, machine learning intelligence, and responsive web systems[cite: 1, 2, 3].</p>
       </div>
       <div class="projects-grid">
-        <a href="https://www.figma.com/proto/FRVgI1yITbqVChRG9dy10w/Redesign-HomePage-Website-JKT48?node-id=277-153&scaling=contain&content-scaling=fixed&page-id=5%3A25" target="_blank" class="pcard reveal">
-          <div class="pcard-imgwrap">
-            <img src="assets/project-1.jpg" alt="JKT48 Website Redesign"/>
-            <div class="pcard-overlay"><span>View Prototype <i class="ri-external-link-line"></i></span></div>
-          </div>
-          <div class="pcard-body">
-            <span class="ptag">UI/UX Design</span>
-            <h3>JKT48 Website Redesign</h3>
-            <p>Homepage redesign with improved information architecture and visual hierarchy.</p>
-          </div>
-        </a>
-        <a href="https://www.figma.com/proto/c0Gyv0ROHXc95EnG8ZDkIF/EPerpusdikbud-UI-Re-Design?node-id=1-4&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A4" target="_blank" class="pcard reveal">
-          <div class="pcard-imgwrap">
-            <img src="assets/project-2.jpg" alt="EPerpusdikbud Redesign"/>
-            <div class="pcard-overlay"><span>View Prototype <i class="ri-external-link-line"></i></span></div>
-          </div>
-          <div class="pcard-body">
-            <span class="ptag">UI Design</span>
-            <h3>EPerpusdikbud Redesign</h3>
-            <p>Mobile app redesign focused on accessibility and user-centered navigation.</p>
-          </div>
-        </a>
-        <a href="https://www.figma.com/proto/XmtdIf2xy8VZtsTNWdokgn/Redesign-Apps-JKT48PM?node-id=14-2&starting-point-node-id=14%3A2" target="_blank" class="pcard reveal">
-          <div class="pcard-imgwrap">
-            <img src="assets/project-3.jpg" alt="JKT48 PM App Redesign"/>
-            <div class="pcard-overlay"><span>View Prototype <i class="ri-external-link-line"></i></span></div>
-          </div>
-          <div class="pcard-body">
-            <span class="ptag">UI Design</span>
-            <h3>JKT48 PM App Redesign</h3>
-            <p>Mobile messaging app redesign with modernized components and UX flows.</p>
-          </div>
-        </a>
         <a href="https://www.roblox.com/id/games/115395112112752/Eternia-Forest" target="_blank" class="pcard reveal">
           <div class="pcard-imgwrap">
-            <img src="assets/eternia-forest.jpg" alt="Eternia Forest"/>
+            <img src="assets/eternia-forest.jpg" alt="Eternia Forest System Operation"/>
             <div class="pcard-overlay"><span>Play Game <i class="ri-external-link-line"></i></span></div>
           </div>
           <div class="pcard-body">
-            <span class="ptag">Game Development</span>
-            <h3>Eternia Forest</h3>
-            <p>A Roblox game developed from concept to launch — world-building and game design.</p>
+            <span class="ptag">Live Infrastructure Operation</span>
+            <h3>Eternia Forest - Distributed Server Map</h3>
+            <p>Managed environment configuration, active live-server patches, system optimizations, and routine asset database maintenance to anchor 1,000+ concurrent active players with over 300K+ total visits[cite: 1, 3].</p>
+          </div>
+        </a>
+        <a href="https://github.com" target="_blank" class="pcard reveal">
+          <div class="pcard-imgwrap">
+            <img src="assets/project-fake-news.jpg" alt="Multilingual AI Prediction Architecture"/>
+            <div class="pcard-overlay"><span>View Repository <i class="ri-external-link-line"></i></span></div>
+          </div>
+          <div class="pcard-body">
+            <span class="ptag">AI Engineering / Final Thesis</span>
+            <h3>Automated Multilingual Hoax Classification</h3>
+            <p>Built a comparative NLP predictive framework utilizing language-focused IndoBERT alongside cross-lingual mBERT and XLM-R transformers on localized tokenization pipelines, hitting a top 88.62% test accuracy[cite: 2, 3].</p>
+          </div>
+        </a>
+        <a href="https://www.figma.com/proto/FRVgI1yITbqVChRG9dy10w/Redesign-HomePage-Website-JKT48?node-id=283-673&t=HHAQvjkovRpOFjPM-1" target="_blank" class="pcard reveal">
+          <div class="pcard-imgwrap">
+            <img src="assets/project-1.jpg" alt="JKT48 Web Architecture Layout"/>
+            <div class="pcard-overlay"><span>View Prototype <i class="ri-external-link-line"></i></span></div>
+          </div>
+          <div class="pcard-body">
+            <span class="ptag">UI/UX Architecture</span>
+            <h3>JKT48 Portal Homepage System Redesign</h3>
+            <p>Restructured platform accessibility parameters via standardized responsive interface design systems in Figma, resolving visibility bottlenecks through custom carousel arrays and dynamic news blocks[cite: 3].</p>
+          </div>
+        </a>
+        <a href="https://www.figma.com/proto/c0Gyv0ROHXc95EnG8ZDkIF/EPerpusdikbud-UI-Re-Design?node-id=1-4" target="_blank" class="pcard reveal">
+          <div class="pcard-imgwrap">
+            <img src="assets/project-2.jpg" alt="EPerpusdikbud UX Flow Asset"/>
+            <div class="pcard-overlay"><span>View Prototype <i class="ri-external-link-line"></i></span></div>
+          </div>
+          <div class="pcard-body">
+            <span class="ptag">UX System Architecture</span>
+            <h3>EPerpusdikbud Mobile Navigation Refactoring</h3>
+            <p>Re-engineered application core user workflows with an emphasis on low-resource accessibility, unified visual token grids, and clean visual interactive components.</p>
           </div>
         </a>
       </div>
@@ -1141,9 +1146,9 @@
   <section class="section section-alt" id="editing">
     <div class="container">
       <div class="sec-head centered reveal">
-        <p class="eyebrow">Creative</p>
-        <h2 class="section-title">Photoshop Editing</h2>
-        <p class="section-desc">Photo editing works showcasing retouching, color grading, and creative design.</p>
+        <p class="eyebrow">Creative Assets</p>
+        <h2 class="section-title">Visual Production</h2>
+        <p class="section-desc">Graphic production workflows utilizing advanced raster image manipulations, color grading matrices, and publishing layouts.</p>
       </div>
       <div class="editing-grid">
         <a href="assets/editing-1.png" target="_blank" class="ecard reveal">
@@ -1175,40 +1180,35 @@
     <div class="container">
       <div class="sec-head centered reveal">
         <p class="eyebrow">Credentials</p>
-        <h2 class="section-title">Certificates</h2>
-        <p class="section-desc">
-          Selected certifications — full list on
-          <a href="https://bit.ly/Certif-Rezi" target="_blank" style="color:var(--gold); text-decoration:underline; text-underline-offset:3px;">
-            Google Drive <i class="ri-external-link-line"></i>
-          </a>
-        </p>
+        <h2 class="section-title">Professional Certifications</h2>
+        <p class="section-desc">Verified international credentials in cloud systems, computational programming, and product design paradigms[cite: 3].</p>
       </div>
       <div class="cert-grid">
         <div class="ccard reveal">
           <div class="ccard-imgwrap">
-            <img src="assets/certificate-1.png" alt="Responsive Web Design Certificate"/>
+            <img src="assets/certificate-alibaba.png" alt="Alibaba Cloud Certification Asset"/>
           </div>
           <div class="ccard-body">
-            <h4>Responsive Web Design</h4>
-            <p>freeCodeCamp · Dec 2024</p>
+            <h4>Alibaba Cloud Certified Developer</h4>
+            <p>Alibaba Cloud · 2026</p>
           </div>
         </div>
         <div class="ccard reveal">
           <div class="ccard-imgwrap">
-            <img src="assets/certificate-2.png" alt="Scientific Computing Certificate"/>
+            <img src="assets/certificate-2.png" alt="Scientific Computing Certificate Asset"/>
           </div>
           <div class="ccard-body">
             <h4>Scientific Computing with Python</h4>
-            <p>freeCodeCamp · Apr 2025</p>
+            <p>freeCodeCamp · 2025</p>
           </div>
         </div>
         <div class="ccard reveal">
           <div class="ccard-imgwrap">
-            <img src="assets/certificate-3.png" alt="Design System Certificate"/>
+            <img src="assets/certificate-3.png" alt="Design System Certificate Asset"/>
           </div>
           <div class="ccard-body">
             <h4>Design System in UI Design</h4>
-            <p>MySkill.id · Dec 2023</p>
+            <p>MySkill Short Class · 2023</p>
           </div>
         </div>
       </div>
@@ -1221,8 +1221,8 @@
       <div class="contact-grid">
         <div class="contact-left reveal">
           <p class="eyebrow">Get In Touch</p>
-          <h2 class="section-title">Let's build something <em>great</em> together</h2>
-          <p style="margin-top:1rem;">Open to internship opportunities, collaborations, and freelance UI/UX projects.</p>
+          <h2 class="section-title">Let's build secure and intuitive <em>infrastructure</em></h2>
+          <p style="margin-top:1rem;">Available for corporate IT support deployment, core system administration, network infrastructure builds, and dynamic visual system management.</p>
         </div>
         <div class="contact-links reveal">
           <a href="https://www.linkedin.com/in/reziichsannurarsyi/" target="_blank" class="clink">
@@ -1233,19 +1233,19 @@
             </div>
             <i class="ri-arrow-right-up-line arr"></i>
           </a>
-          <a href="https://www.instagram.com/jiwoo_reziichsan" target="_blank" class="clink">
-            <i class="ri-instagram-line"></i>
+          <a href="mailto:reziichsan@gmail.com" target="_blank" class="clink">
+            <i class="ri-mail-line"></i>
             <div class="clink-text">
-              <strong>Instagram</strong>
-              <span>@jiwoo_reziichsan</span>
+              <strong>Email Address</strong>
+              <span>reziichsan@gmail.com</span>
             </div>
             <i class="ri-arrow-right-up-line arr"></i>
           </a>
-          <a href="https://www.tiktok.com/@vanillalatte_zii" target="_blank" class="clink">
-            <i class="ri-tiktok-fill"></i>
+          <a href="https://reziichsan.github.io/My-Portofolio" target="_blank" class="clink">
+            <i class="ri-git-branch-line"></i>
             <div class="clink-text">
-              <strong>TikTok</strong>
-              <span>@vanillalatte_zii</span>
+              <strong>GitHub Hub</strong>
+              <span>reziichsan.github.io</span>
             </div>
             <i class="ri-arrow-right-up-line arr"></i>
           </a>
@@ -1256,7 +1256,7 @@
 
   <!-- ── FOOTER ─────────────────────────────── -->
   <footer class="footer">
-    <p>© 2025 Rezi Ichsannur Arsyi — All rights reserved.</p>
+    <p>© 2026 Rezi Ichsannur Arsyi — All rights reserved.</p>
   </footer>
 
   <!-- ── SCRIPTS ────────────────────────────── -->
