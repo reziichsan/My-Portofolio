@@ -3,7 +3,37 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rezi Ichsannur Arsyi — Portofolio</title>
+  <title>Rezi Ichsannur Arsyi — Informatics Specialist | IT Support & UI/UX</title>
+  <meta name="description" content="Portofolio Rezi Ichsannur Arsyi — Informatics Specialist dengan pengalaman di IT Support, UI/UX Design, server infrastructure, dan Machine Learning/NLP. Terbuka untuk peluang full-time & magang."/>
+  <meta name="keywords" content="Rezi Ichsan, Informatics, IT Support, UI/UX Design, Machine Learning, NLP, Telkom University, Portfolio"/>
+  <meta name="author" content="Rezi Ichsannur Arsyi"/>
+  <meta name="theme-color" content="#09090f"/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2309090f'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23d1a366' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E"/>
+
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Rezi Ichsannur Arsyi — Informatics Specialist"/>
+  <meta property="og:description" content="IT Support & UI/UX Design Enthusiast — server infrastructure, network systems, dan Machine Learning/NLP projects."/>
+  <meta property="og:image" content="assets/header.jpg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Rezi Ichsannur Arsyi — Informatics Specialist"/>
+  <meta name="twitter:description" content="IT Support & UI/UX Design Enthusiast — server infrastructure, network systems, dan Machine Learning/NLP projects."/>
+  <meta name="twitter:image" content="assets/header.jpg"/>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Rezi Ichsannur Arsyi",
+    "jobTitle": "Informatics Specialist",
+    "alumniOf": "Telkom University",
+    "email": "mailto:reziichsan@gmail.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/reziichsannurarsyi/",
+      "https://reziichsan.github.io/My-Portofolio"
+    ]
+  }
+  </script>
+
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
@@ -266,6 +296,7 @@
       font-style: normal;
       letter-spacing: 0;
       margin-top: 0.3em;
+      min-height: 1.4em;
     }
     .hero-sub {
       max-width: 460px;
@@ -984,9 +1015,68 @@
       transition: all 0.2s;
     }
     .lightbox-close:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── SKIP LINK (accessibility) ───────────────────── */
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      left: 1rem;
+      background: var(--gold);
+      color: #0a0805;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 1rem; }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    /* ── QUICK FACTS STRIP ────────────────────────────── */
+    .quick-facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.4rem;
+      margin-bottom: 2rem;
+    }
+    .quick-facts .qf-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .quick-facts .qf-item i { color: var(--gold); font-size: 0.95rem; }
+    @media (max-width: 820px) { .quick-facts { justify-content: center; } }
+
+    /* ── TYPEWRITER ROLE ──────────────────────────────── */
+    .role-cursor {
+      display: inline-block;
+      width: 2px;
+      background: var(--gold);
+      margin-left: 2px;
+      animation: blinkCursor 0.9s step-end infinite;
+    }
+    @keyframes blinkCursor { 50% { opacity: 0; } }
+
+    /* ── PRINT ────────────────────────────────────────── */
+    @media print {
+      #navbar, #scrollProgress, .back-to-top, .hero-blob, .lightbox, body::after { display: none !important; }
+      body { background: #fff; color: #111; }
+      .section { padding: 1.5rem 0; }
+      .tl-card, .skill-card, .pcard, .ccard { border: 1px solid #ccc; box-shadow: none; }
+      .section-title, .tl-card h3, .pcard-body h3 { color: #111; }
+      .hero { min-height: auto; padding-top: 1.5rem; }
+    }
   </style>
 </head>
 <body>
+
+  <a href="#home" class="skip-link">Skip to content</a>
 
   <div id="scrollProgress"></div>
 
@@ -1029,11 +1119,16 @@
       </div>
       <h1 class="hero-title reveal">
         Hi, I'm <span class="name">Rezi Ichsan</span>
-        <span class="role">Informatics Specialist | IT Support & UI/UX Design Enthusiast</span>
+        <span class="role"><span id="roleTypewriter"></span><span class="role-cursor">&nbsp;</span></span>
       </h1>
       <p class="hero-sub reveal">
         Result-oriented Informatics student with hands-on experience in IT support, user experience design, server optimization, and data-driven AI frameworks.
       </p>
+      <div class="quick-facts reveal">
+        <span class="qf-item"><i class="ri-map-pin-2-line"></i> Bandung, Indonesia</span>
+        <span class="qf-item"><i class="ri-suitcase-line"></i> Open to Full-time & Internship</span>
+        <span class="qf-item"><i class="ri-translate-2"></i> Bahasa Indonesia · English</span>
+      </div>
       <div class="hero-btns reveal">
         <a href="#projects" class="btn btn-primary">View Projects <i class="ri-arrow-right-line"></i></a>
         <a href="https://drive.google.com/file/d/1lQx_f5_wEBYhItybOfH4ae2UAdh1QsgJ/view?usp=sharing" class="btn btn-outline" download>Download CV <i class="ri-download-2-line"></i></a>
@@ -1082,8 +1177,8 @@
         <div class="about-text reveal">
           <p class="eyebrow">About Me</p>
           <h2 class="section-title">Bridging <em>technology</em><br>and user experience</h2>
-          <p>I'm an undergraduate Informatics student at <strong>Telkom University</strong> specializing in corporate IT systems, server architecture, and interface systems. I focus on developing clean infrastructure while maintaining a user-focused approach to technical executions.</p>
-          <p>Proven capability managing multiplayer server environments for <strong>1,000+ concurrent users</strong> and implementing NLP machine learning projects with a peak validation accuracy of <strong>88.62%</strong> Proficient in Figma, system deployments, network routing setups, and enterprise application testing workflows.</p>
+          <p>I'm an Freshgraduate Informatics student at <strong>Telkom University</strong> specializing in corporate IT systems, server architecture, and interface systems. I focus on developing clean infrastructure while maintaining a user-focused approach to technical executions.</p>
+          <p>Proven capability managing multiplayer server environments for <strong>1,000+ concurrent users</strong> and implementing NLP machine learning projects with a peak validation accuracy of <strong>88.62%</strong>. Proficient in Figma, system deployments, network routing setups, and enterprise application testing workflows.</p>
           <div class="about-chips">
             <span>IT Troubleshooting</span>
             <span>Network Security</span>
@@ -1512,6 +1607,30 @@
     lightboxClose.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
     window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+    /* Typewriter role titles */
+    const roles = [
+      'Informatics Specialist',
+      'IT Support Enthusiast',
+      'UI/UX Design Practitioner',
+      'Machine Learning & NLP Explorer'
+    ];
+    const roleEl = document.getElementById('roleTypewriter');
+    let rIdx = 0, cIdx = 0, deleting = false;
+    function typeRole() {
+      const current = roles[rIdx];
+      if (!deleting) {
+        cIdx++;
+        roleEl.textContent = current.slice(0, cIdx);
+        if (cIdx === current.length) { deleting = true; setTimeout(typeRole, 1600); return; }
+      } else {
+        cIdx--;
+        roleEl.textContent = current.slice(0, cIdx);
+        if (cIdx === 0) { deleting = false; rIdx = (rIdx + 1) % roles.length; }
+      }
+      setTimeout(typeRole, deleting ? 35 : 55);
+    }
+    typeRole();
   </script>
 </body>
 </html>
