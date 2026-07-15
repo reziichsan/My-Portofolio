@@ -222,6 +222,8 @@
       transition: color 0.2s, background 0.2s;
     }
     .nav-links a:hover { color: var(--text); background: var(--surface-h); }
+    .nav-links a.active { color: var(--gold); background: var(--gold-dim); }
+    .nav-mobile a.active { color: var(--gold); }
     .nav-links .nav-cta {
       color: var(--text);
       border: 1px solid var(--border);
@@ -954,6 +956,67 @@
       .contact-left .section-title { text-align: center; }
     }
 
+    /* ── DOT NAV (desktop side breadcrumb) ───────────── */
+    .dot-nav {
+      position: fixed;
+      right: 1.6rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 150;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1.05rem;
+    }
+    .dot-nav::before {
+      content: '';
+      position: absolute;
+      right: 3px;
+      top: 6px;
+      bottom: 6px;
+      width: 1px;
+      background: var(--border);
+      z-index: -1;
+    }
+    .dot-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .dot-item .dot-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      white-space: nowrap;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 0.28rem 0.7rem;
+      border-radius: 99px;
+      opacity: 0;
+      transform: translateX(8px);
+      transition: opacity 0.22s ease, transform 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+      pointer-events: none;
+    }
+    .dot-item .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      border: 1.5px solid var(--muted);
+      background: var(--bg);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+    .dot-item:hover .dot-label { opacity: 1; transform: translateX(0); border-color: var(--border-h); }
+    .dot-item:hover .dot { border-color: var(--gold); transform: scale(1.15); }
+    .dot-item.active .dot {
+      background: var(--gold);
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(209,163,102,0.18);
+    }
+    .dot-item.active .dot-label { color: var(--gold); }
+    @media (max-width: 1080px) { .dot-nav { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .dot-item .dot-label { transition: none; } }
+
     /* ── FOOTER ──────────────────────────────────────── */
     .footer {
       padding: 1.65rem 1.5rem;
@@ -1170,8 +1233,8 @@
         <li><a href="#experience">Experience</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#editing">Gallery</a></li>
         <li><a href="#certificates">Certificates</a></li>
+        <li><a href="#editing">Gallery</a></li>
         <li><a href="#contact" class="nav-cta">Contact</a></li>
       </ul>
       <button class="nav-burger" id="burger" aria-label="Toggle menu">
@@ -1183,8 +1246,8 @@
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
-      <a href="#editing">Gallery</a>
       <a href="#certificates">Certificates</a>
+      <a href="#editing">Gallery</a>
       <a href="#contact">Contact</a>
     </nav>
   </nav>
@@ -1212,7 +1275,7 @@
       </div>
       <div class="hero-btns reveal">
         <a href="#projects" class="btn btn-primary">View Projects <i class="ri-arrow-right-line"></i></a>
-        <a href="CV.pdf" class="btn btn-outline" download="CV.pdf">Download CV <i class="ri-download-2-line"></i></a>
+        <a href="CV.pdf" class="btn btn-outline" download="Rezi-Ichsan-Nur-Arsyi-CV.pdf">Download CV <i class="ri-download-2-line"></i></a>
       </div>
       <div class="hero-stats reveal">
         <div class="hero-stat">
@@ -1299,7 +1362,7 @@
                 <span class="tl-date">Jul 2022 — Sep 2022</span>
                 <h3>Web Developer Intern</h3>
                 <p class="tl-company"><i class="ri-building-line"></i> Nutrifood Indonesia · Remote Internship</p>
-                <p class="tl-desc">Collaborated in developing an Enterprise Social Media Monitoring System using Django. Engineered Digital Meeting management features, implemented custom CRUD functions, search endpoints, and structured local environment staging.</p>
+                <p class="tl-desc">Shipped the Digital Meeting module for Nutrifood's internal Enterprise Social Media Monitoring platform, built end-to-end in Django — CRUD operations, a full-text search endpoint, and role-based staging environments — so the comms team could log, search, and revisit meeting notes without leaving the dashboard.</p>
                 <div class="tl-tags">
                   <span>Python</span><span>Django</span><span>CRUD Systems</span><span>Technical Support</span>
                 </div>
@@ -1403,7 +1466,7 @@
           <div class="pcard-body">
             <span class="ptag">Full-Stack AI Engineering</span>
             <h3>Simple IT Ticketing</h3>
-            <p>Built an automated helpdesk ticketing system integrated with Gemini API. Automatically parses issue descriptions to classify categories and urgency priority metrics in real-time, complete with a cyber-ops dark terminal UI for active queue management and status mutation.</p>
+            <p>Automated helpdesk ticket triage with the Gemini API — free-text issue reports are parsed and instantly tagged with category and urgency priority, no manual sorting required. Paired with a dark, terminal-style ops console for real-time queue management and status updates.</p>
           </div>
         </a>
 
@@ -1415,7 +1478,7 @@
           <div class="pcard-body">
             <span class="ptag">Game Developer</span>
             <h3>Eternia Forest - Distributed Server Map</h3>
-            <p>Managed environment configuration, active live-server patches, system optimizations, and routine asset database maintenance to anchor 1,000+ concurrent active players with over 300K+ total visits.</p>
+            <p>Operate and maintain a live Roblox server sustaining 1,000+ concurrent players and 300K+ total visits. Own environment configuration, live-server patch deployment, performance tuning, and asset database maintenance to keep the world stable under peak traffic.</p>
           </div>
         </a>
 
@@ -1427,7 +1490,7 @@
           <div class="pcard-body">
             <span class="ptag">AI Engineering / Final Thesis</span>
             <h3>Automated Multilingual Hoax Classification</h3>
-            <p>Built a comparative NLP predictive framework utilizing language-focused IndoBERT alongside cross-lingual mBERT and XLM-R transformers on localized tokenization pipelines, hitting a top 88.62% test accuracy.</p>
+            <p>Benchmarked IndoBERT against cross-lingual mBERT and XLM-R on a custom Indonesian tokenization pipeline to detect hoaxes in local-language text. IndoBERT came out on top at 88.62% test accuracy — the model behind my final thesis.</p>
           </div>
         </a>
 
@@ -1439,7 +1502,7 @@
           <div class="pcard-body">
             <span class="ptag">UI/UX Redesign</span>
             <h3>JKT48 Portal Homepage System Redesign</h3>
-            <p>Restructured platform accessibility parameters via standardized responsive interface design systems in Figma, resolving visibility bottlenecks through custom carousel arrays and dynamic news blocks.</p>
+            <p>Redesigned the JKT48 fan portal homepage in Figma to fix low content visibility — replacing static banners with a custom carousel and dynamic news blocks, and standardizing the layout into a responsive design system.</p>
           </div>
         </a>
 
@@ -1451,48 +1514,15 @@
           <div class="pcard-body">
             <span class="ptag">UI Redesign</span>
             <h3>EPerpusdikbud Mobile Navigation Refactoring</h3>
-            <p>Re-engineered application core user workflows with an emphasis on low-resource accessibility, unified visual token grids, and clean visual interactive components.</p>
+            <p>Rebuilt EPerpusdikbud's mobile navigation flow around low-bandwidth accessibility, consolidating scattered UI patterns into one token-based design system for faster, more consistent screen-to-screen transitions.</p>
           </div>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ── PHOTOSHOP EDITING ───────────────────── -->
-  <section class="section section-alt" id="editing">
-    <div class="container">
-      <div class="sec-head centered reveal">
-        <p class="eyebrow">Creative Assets</p>
-        <h2 class="section-title">Visual Production</h2>
-        <p class="section-desc">Graphic production workflows utilizing advanced raster image manipulations, color grading matrices, and publishing layouts.</p>
-      </div>
-      <div class="editing-grid">
-        <a href="assets/editing-1.png" class="ecard reveal" data-lightbox data-caption="Infografis Germany">
-          <img src="assets/editing-1.png" alt="Infografis Germany"/>
-          <div class="ecard-label"><span>Infografis Germany</span></div>
-        </a>
-        <a href="assets/editing-2.png" class="ecard reveal" data-lightbox data-caption="Wallpaper JKT48 Indira">
-          <img src="assets/editing-2.png" alt="Wallpaper JKT48 Indira"/>
-          <div class="ecard-label"><span>Wallpaper JKT48 Indira</span></div>
-        </a>
-        <a href="assets/editing-3.png" class="ecard reveal" data-lightbox data-caption="Custom Jersey">
-          <img src="assets/editing-3.png" alt="Custom Jersey"/>
-          <div class="ecard-label"><span>Custom Jersey</span></div>
-        </a>
-        <a href="assets/2.png" class="ecard reveal" data-lightbox data-caption="Wallpaper Portrait JKT48">
-          <img src="assets/2.png" alt="Wallpaper Portrait JKT48"/>
-          <div class="ecard-label"><span>Wallpaper Portrait JKT48</span></div>
-        </a>
-        <a href="assets/3.jpg" class="ecard reveal" data-lightbox data-caption="Poster Jualan">
-          <img src="assets/3.jpg" alt="Poster Jualan"/>
-          <div class="ecard-label"><span>Poster Jualan</span></div>
-        </a>
-      </div>
-    </div>
-  </section>
-
   <!-- ── CERTIFICATES ───────────────────────── -->
-  <section class="section" id="certificates">
+  <section class="section section-alt" id="certificates">
     <div class="container">
       <div class="sec-head centered reveal">
         <p class="eyebrow">Credentials</p>
@@ -1540,6 +1570,39 @@
     </div>
   </section>
 
+  <!-- ── PHOTOSHOP EDITING ───────────────────── -->
+  <section class="section" id="editing">
+    <div class="container">
+      <div class="sec-head centered reveal">
+        <p class="eyebrow">Creative Assets</p>
+        <h2 class="section-title">Visual Production</h2>
+        <p class="section-desc">Graphic production workflows utilizing advanced raster image manipulations, color grading matrices, and publishing layouts.</p>
+      </div>
+      <div class="editing-grid">
+        <a href="assets/editing-1.png" class="ecard reveal" data-lightbox data-caption="Infografis Germany">
+          <img src="assets/editing-1.png" alt="Infografis Germany"/>
+          <div class="ecard-label"><span>Infografis Germany</span></div>
+        </a>
+        <a href="assets/editing-2.png" class="ecard reveal" data-lightbox data-caption="Wallpaper JKT48 Indira">
+          <img src="assets/editing-2.png" alt="Wallpaper JKT48 Indira"/>
+          <div class="ecard-label"><span>Wallpaper JKT48 Indira</span></div>
+        </a>
+        <a href="assets/editing-3.png" class="ecard reveal" data-lightbox data-caption="Custom Jersey">
+          <img src="assets/editing-3.png" alt="Custom Jersey"/>
+          <div class="ecard-label"><span>Custom Jersey</span></div>
+        </a>
+        <a href="assets/2.png" class="ecard reveal" data-lightbox data-caption="Wallpaper Portrait JKT48">
+          <img src="assets/2.png" alt="Wallpaper Portrait JKT48"/>
+          <div class="ecard-label"><span>Wallpaper Portrait JKT48</span></div>
+        </a>
+        <a href="assets/3.jpg" class="ecard reveal" data-lightbox data-caption="Poster Jualan">
+          <img src="assets/3.jpg" alt="Poster Jualan"/>
+          <div class="ecard-label"><span>Poster Jualan</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ── CONTACT ────────────────────────────── -->
   <section class="section section-alt" id="contact">
     <div class="container">
@@ -1578,6 +1641,18 @@
       </div>
     </div>
   </section>
+
+  <!-- ── DOT NAV (desktop breadcrumb) ────────── -->
+  <nav class="dot-nav" id="dotNav" aria-label="Section quick navigation">
+    <a href="#home" class="dot-item"><span class="dot-label">Home</span><span class="dot"></span></a>
+    <a href="#about" class="dot-item"><span class="dot-label">About</span><span class="dot"></span></a>
+    <a href="#experience" class="dot-item"><span class="dot-label">Experience</span><span class="dot"></span></a>
+    <a href="#skills" class="dot-item"><span class="dot-label">Skills</span><span class="dot"></span></a>
+    <a href="#projects" class="dot-item"><span class="dot-label">Projects</span><span class="dot"></span></a>
+    <a href="#certificates" class="dot-item"><span class="dot-label">Certificates</span><span class="dot"></span></a>
+    <a href="#editing" class="dot-item"><span class="dot-label">Gallery</span><span class="dot"></span></a>
+    <a href="#contact" class="dot-item"><span class="dot-label">Contact</span><span class="dot"></span></a>
+  </nav>
 
   <!-- ── LIGHTBOX ───────────────────────────── -->
   <div class="lightbox" id="lightbox">
@@ -1675,6 +1750,21 @@
       });
     }, { threshold: 0.5 });
     counters.forEach(c => counterObserver.observe(c));
+
+    /* Scrollspy: highlight navbar + dot-nav based on section in view */
+    const spySections = document.querySelectorAll('section[id]');
+    const spyNavLinks = document.querySelectorAll('.nav-links a[href^="#"], .nav-mobile a[href^="#"]');
+    const spyDotLinks = document.querySelectorAll('.dot-nav a[href^="#"]');
+    const spyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          spyNavLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+          spyDotLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+        }
+      });
+    }, { rootMargin: '-42% 0px -54% 0px', threshold: 0 });
+    spySections.forEach(sec => spyObserver.observe(sec));
 
     /* Lightbox */
     const lightbox = document.getElementById('lightbox');
