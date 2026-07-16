@@ -725,6 +725,95 @@
       transform: translate(0, 0);
     }
 
+    /* ── ROLE FIT STRIP ──────────────────────────────── */
+    .rolefit-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .rolefit-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 1.5rem 1.35rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .rolefit-card:hover {
+      border-color: var(--border-h);
+      background: var(--surface-h);
+      transform: translateY(-4px);
+    }
+    .rolefit-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(209,163,102,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .rolefit-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.55rem;
+    }
+    .rolefit-card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 0.9rem;
+    }
+    .rolefit-link {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      opacity: 0.85;
+      transition: gap 0.2s;
+    }
+    .rolefit-card:hover .rolefit-link { gap: 0.5rem; }
+    @media (max-width: 900px) { .rolefit-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .rolefit-grid { grid-template-columns: 1fr; } }
+
+    /* ── PROJECT FILTER BAR ──────────────────────────── */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.02em;
+      padding: 0.5rem 1.1rem;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover { border-color: var(--border-h); color: var(--text); }
+    .filter-btn.active {
+      background: linear-gradient(135deg, #c98a3f, var(--gold-light));
+      border-color: transparent;
+      color: #0a0805;
+      font-weight: 500;
+    }
+    .pcard.hidden { display: none; }
+    .pcard { animation: cardIn 0.35s ease; }
+    @keyframes cardIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
     /* ── PROJECTS ────────────────────────────────────── */
     .projects-grid {
       display: grid;
@@ -1264,7 +1353,7 @@
         <span class="role"><span id="roleTypewriter"></span><span class="role-cursor">&nbsp;</span></span>
       </h1>
       <p class="hero-sub reveal">
-        Result-oriented Informatics student with hands-on experience in IT support, user experience design, server optimization, and data-driven AI frameworks.
+        Final-year Informatics student who moves fluidly across four connected fields — <strong style="color:var(--text); font-weight:500;">IT Support, Network/Systems, UI/UX, and Machine Learning</strong> — because most real IT problems touch all four. Open to full-time and internship roles.
       </p>
       <div class="quick-facts reveal">
         <span class="qf-item"><i class="ri-map-pin-2-line"></i> Bekasi, Indonesia</span>
@@ -1302,6 +1391,42 @@
         <div class="hero-img-ring">
           <i class="ri-code-line"></i>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ROLE FIT ───────────────────────────── -->
+  <section class="section" id="rolefit" style="padding-top: 3.5rem; padding-bottom: 3.5rem;">
+    <div class="container">
+      <div class="sec-head centered reveal" style="margin-bottom: 2rem;">
+        <p class="eyebrow">Where I Fit</p>
+        <h2 class="section-title" style="font-size: clamp(1.6rem, 3vw, 2.1rem);">Four fields, <em>one</em> engineer</h2>
+      </div>
+      <div class="rolefit-grid">
+        <a href="#skills" class="rolefit-card reveal">
+          <div class="rolefit-icon"><i class="ri-customer-service-2-line"></i></div>
+          <h4>IT Support</h4>
+          <p>Hardware deployment, OS provisioning, and helpdesk workflows — plus a self-built Gemini-powered ticket triage system.</p>
+          <span class="rolefit-link">See skills <i class="ri-arrow-right-s-line"></i></span>
+        </a>
+        <a href="#projects" class="rolefit-card reveal">
+          <div class="rolefit-icon"><i class="ri-server-line"></i></div>
+          <h4>Systems &amp; Network</h4>
+          <p>Run and maintain a live server sustaining 1,000+ concurrent users, with TCP/IP, VLAN, and access-control experience.</p>
+          <span class="rolefit-link">See projects <i class="ri-arrow-right-s-line"></i></span>
+        </a>
+        <a href="#projects" class="rolefit-card reveal">
+          <div class="rolefit-icon"><i class="ri-pencil-ruler-2-line"></i></div>
+          <h4>UI/UX Design</h4>
+          <p>Figma-based redesigns shipped for two live products, backed by a formal Design System certification.</p>
+          <span class="rolefit-link">See projects <i class="ri-arrow-right-s-line"></i></span>
+        </a>
+        <a href="#projects" class="rolefit-card reveal">
+          <div class="rolefit-icon"><i class="ri-brain-line"></i></div>
+          <h4>Data / ML</h4>
+          <p>Benchmarked three transformer models for my thesis, hitting 88.62% accuracy on real Indonesian-language data.</p>
+          <span class="rolefit-link">See projects <i class="ri-arrow-right-s-line"></i></span>
+        </a>
       </div>
     </div>
   </section>
@@ -1452,13 +1577,19 @@
       <div class="sec-head centered reveal">
         <p class="eyebrow">Selected Works</p>
         <h2 class="section-title">System Implementations</h2>
-        <p class="section-desc">Engineering stable network server frameworks, machine learning intelligence, and responsive web systems.</p>
+        <p class="section-desc">Engineering stable network server frameworks, machine learning intelligence, and responsive web systems — filter by track to jump straight to what's relevant.</p>
+      </div>
+      <div class="filter-bar reveal">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="it">IT &amp; Systems</button>
+        <button class="filter-btn" data-filter="uiux">UI/UX</button>
+        <button class="filter-btn" data-filter="ai">AI/ML</button>
       </div>
       <div class="projects-grid">
         <!-- New Featured AI Project -->
-        <a href="https://github.com/reziichsan/automated-it-ticketing-system" target="_blank" class="pcard reveal">
+        <a href="https://github.com/reziichsan/automated-it-ticketing-system" target="_blank" class="pcard reveal" data-category="it ai">
           <div class="pcard-imgwrap">
-            <img src="assets/IT.png" alt="IT-OPS Triage Console Dashboard"/>
+            <img src="assets/IT.png" alt="IT-OPS Triage Console Dashboard" loading="lazy"/>
             <div class="pcard-overlay"><span>View Repository <i class="ri-external-link-line"></i></span></div>
           </div>
           <div class="pcard-body">
@@ -1468,9 +1599,9 @@
           </div>
         </a>
 
-        <a href="https://www.roblox.com/id/games/115395112112752/Eternia-Forest" target="_blank" class="pcard reveal">
+        <a href="https://www.roblox.com/id/games/115395112112752/Eternia-Forest" target="_blank" class="pcard reveal" data-category="it">
           <div class="pcard-imgwrap">
-            <img src="assets/eternia-forest.jpg" alt="Eternia Forest System Operation"/>
+            <img src="assets/eternia-forest.jpg" alt="Eternia Forest System Operation" loading="lazy"/>
             <div class="pcard-overlay"><span>Play Game <i class="ri-external-link-line"></i></span></div>
           </div>
           <div class="pcard-body">
@@ -1480,9 +1611,9 @@
           </div>
         </a>
 
-        <a href="https://github.com/reziichsan/HoaxDetection" target="_blank" class="pcard reveal">
+        <a href="https://github.com/reziichsan/HoaxDetection" target="_blank" class="pcard reveal" data-category="ai">
           <div class="pcard-imgwrap">
-            <img src="assets/tes.png" alt="Multilingual AI Prediction Architecture"/>
+            <img src="assets/tes.png" alt="Multilingual AI Prediction Architecture" loading="lazy"/>
             <div class="pcard-overlay"><span>View Repository <i class="ri-external-link-line"></i></span></div>
           </div>
           <div class="pcard-body">
@@ -1492,9 +1623,9 @@
           </div>
         </a>
 
-        <a href="https://www.figma.com/proto/FRVgI1yITbqVChRG9dy10w/Redesign-HomePage-Website-JKT48?node-id=283-673&t=HHAQvjkovRpOFjPM-1" target="_blank" class="pcard reveal">
+        <a href="https://www.figma.com/proto/FRVgI1yITbqVChRG9dy10w/Redesign-HomePage-Website-JKT48?node-id=283-673&t=HHAQvjkovRpOFjPM-1" target="_blank" class="pcard reveal" data-category="uiux">
           <div class="pcard-imgwrap">
-            <img src="assets/project-1.jpg" alt="JKT48 Web Architecture Layout"/>
+            <img src="assets/project-1.jpg" alt="JKT48 Web Architecture Layout" loading="lazy"/>
             <div class="pcard-overlay"><span>View Prototype <i class="ri-external-link-line"></i></span></div>
           </div>
           <div class="pcard-body">
@@ -1504,9 +1635,9 @@
           </div>
         </a>
 
-        <a href="https://www.figma.com/proto/c0Gyv0ROHXc95EnG8ZDkIF/EPerpusdikbud-UI-Re-Design?node-id=1-4" target="_blank" class="pcard reveal">
+        <a href="https://www.figma.com/proto/c0Gyv0ROHXc95EnG8ZDkIF/EPerpusdikbud-UI-Re-Design?node-id=1-4" target="_blank" class="pcard reveal" data-category="uiux">
           <div class="pcard-imgwrap">
-            <img src="assets/project-2.jpg" alt="EPerpusdikbud UX Flow Asset"/>
+            <img src="assets/project-2.jpg" alt="EPerpusdikbud UX Flow Asset" loading="lazy"/>
             <div class="pcard-overlay"><span>View Prototype <i class="ri-external-link-line"></i></span></div>
           </div>
           <div class="pcard-body">
@@ -1530,7 +1661,7 @@
       <div class="cert-grid">
         <div class="ccard reveal">
           <div class="ccard-imgwrap" data-lightbox data-caption="Alibaba Cloud Certified Developer">
-            <img src="assets/Alibaba Cloud Dev.png" alt="Alibaba Cloud Certification Asset"/>
+            <img src="assets/Alibaba Cloud Dev.png" alt="Alibaba Cloud Certification Asset" loading="lazy"/>
           </div>
           <div class="ccard-body">
             <h4>Alibaba Cloud Certified Developer</h4>
@@ -1539,7 +1670,7 @@
         </div>
         <div class="ccard reveal">
           <div class="ccard-imgwrap" data-lightbox data-caption="Responsive Web Design">
-            <img src="assets/certificate-1.png" alt="Responsive Web Design Certificate Asset"/>
+            <img src="assets/certificate-1.png" alt="Responsive Web Design Certificate Asset" loading="lazy"/>
           </div>
           <div class="ccard-body">
             <h4>Responsive Web Design</h4>
@@ -1548,7 +1679,7 @@
         </div>
         <div class="ccard reveal">
           <div class="ccard-imgwrap" data-lightbox data-caption="Scientific Computing with Python">
-            <img src="assets/certificate-2.png" alt="Scientific Computing Certificate Asset"/>
+            <img src="assets/certificate-2.png" alt="Scientific Computing Certificate Asset" loading="lazy"/>
           </div>
           <div class="ccard-body">
             <h4>Scientific Computing with Python</h4>
@@ -1557,7 +1688,7 @@
         </div>
         <div class="ccard reveal">
           <div class="ccard-imgwrap" data-lightbox data-caption="Design System in UI Design">
-            <img src="assets/certificate-3.png" alt="Design System Certificate Asset"/>
+            <img src="assets/certificate-3.png" alt="Design System Certificate Asset" loading="lazy"/>
           </div>
           <div class="ccard-body">
             <h4>Design System in UI Design</h4>
@@ -1578,23 +1709,23 @@
       </div>
       <div class="editing-grid">
         <a href="assets/editing-1.png" class="ecard reveal" data-lightbox data-caption="Infografis Germany">
-          <img src="assets/editing-1.png" alt="Infografis Germany"/>
+          <img src="assets/editing-1.png" alt="Infografis Germany" loading="lazy"/>
           <div class="ecard-label"><span>Infografis Germany</span></div>
         </a>
         <a href="assets/editing-2.png" class="ecard reveal" data-lightbox data-caption="Wallpaper JKT48 Indira">
-          <img src="assets/editing-2.png" alt="Wallpaper JKT48 Indira"/>
+          <img src="assets/editing-2.png" alt="Wallpaper JKT48 Indira" loading="lazy"/>
           <div class="ecard-label"><span>Wallpaper JKT48 Indira</span></div>
         </a>
         <a href="assets/editing-3.png" class="ecard reveal" data-lightbox data-caption="Custom Jersey">
-          <img src="assets/editing-3.png" alt="Custom Jersey"/>
+          <img src="assets/editing-3.png" alt="Custom Jersey" loading="lazy"/>
           <div class="ecard-label"><span>Custom Jersey</span></div>
         </a>
         <a href="assets/2.png" class="ecard reveal" data-lightbox data-caption="Wallpaper Portrait JKT48">
-          <img src="assets/2.png" alt="Wallpaper Portrait JKT48"/>
+          <img src="assets/2.png" alt="Wallpaper Portrait JKT48" loading="lazy"/>
           <div class="ecard-label"><span>Wallpaper Portrait JKT48</span></div>
         </a>
         <a href="assets/3.jpg" class="ecard reveal" data-lightbox data-caption="Poster Jualan">
-          <img src="assets/3.jpg" alt="Poster Jualan"/>
+          <img src="assets/3.jpg" alt="Poster Jualan" loading="lazy"/>
           <div class="ecard-label"><span>Poster Jualan</span></div>
         </a>
       </div>
@@ -1763,6 +1894,22 @@
       });
     }, { rootMargin: '-42% 0px -54% 0px', threshold: 0 });
     spySections.forEach(sec => spyObserver.observe(sec));
+
+    /* Project filter bar */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.pcard');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        projectCards.forEach(card => {
+          const cats = (card.dataset.category || '').split(' ');
+          const show = filter === 'all' || cats.includes(filter);
+          card.classList.toggle('hidden', !show);
+        });
+      });
+    });
 
     /* Lightbox */
     const lightbox = document.getElementById('lightbox');
