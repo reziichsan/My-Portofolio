@@ -1294,6 +1294,88 @@
     }
     @keyframes blinkCursor { 50% { opacity: 0; } }
 
+    /* ── TOAST NOTIFICATIONS ──────────────────────────── */
+    #toastStack {
+      position: fixed;
+      bottom: 1.75rem;
+      left: 1.75rem;
+      z-index: 400;
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 0.6rem;
+    }
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-h);
+      color: var(--text);
+      padding: 0.8rem 1.15rem;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+      transform: translateY(12px);
+      opacity: 0;
+      animation: toastIn 0.35s ease forwards, toastOut 0.35s ease forwards 2.4s;
+    }
+    .toast i { color: var(--gold); font-size: 1rem; }
+    @keyframes toastIn { to { transform: none; opacity: 1; } }
+    @keyframes toastOut { to { transform: translateY(-10px); opacity: 0; } }
+
+    /* ── LIVE CLOCK CHIP ───────────────────────────────── */
+    .live-clock {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .live-clock i { color: var(--gold); font-size: 0.95rem; }
+    .live-clock strong { color: var(--text); font-weight: 500; letter-spacing: 0.02em; }
+
+    /* ── MAGNETIC BUTTON WRAPPER ──────────────────────── */
+    .btn-primary, .btn-outline { will-change: transform; }
+
+    /* ── TILT-READY CARDS ──────────────────────────────── */
+    .pcard, .skill-card, .ccard, .rolefit-card {
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    /* ── COPIED STATE FOR EMAIL LINK ─────────────────────── */
+    .clink.copied { border-color: var(--gold); background: var(--gold-dim); }
+
+    /* ── CONFETTI CANVAS ──────────────────────────────────── */
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 600;
+    }
+
+    /* ── SCROLL-TO-TOP RING PROGRESS ─────────────────────── */
+    .back-to-top { overflow: visible; }
+    .back-to-top svg {
+      position: absolute;
+      inset: -3px;
+      width: calc(100% + 6px);
+      height: calc(100% + 6px);
+      transform: rotate(-90deg);
+      pointer-events: none;
+    }
+    .back-to-top svg circle {
+      fill: none;
+      stroke: var(--gold-light);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 138;
+      stroke-dashoffset: 138;
+      transition: stroke-dashoffset 0.1s linear;
+      opacity: 0.85;
+    }
+
     /* ── PRINT ────────────────────────────────────────── */
     @media print {
       #navbar, #scrollProgress, .back-to-top, .hero-blob, .lightbox, body::after { display: none !important; }
@@ -1359,6 +1441,7 @@
         <span class="qf-item"><i class="ri-map-pin-2-line"></i> Bekasi, Indonesia</span>
         <span class="qf-item"><i class="ri-suitcase-line"></i> Open to Full-time & Internship</span>
         <span class="qf-item"><i class="ri-translate-2-line"></i> Bahasa Indonesia · English</span>
+        <span class="qf-item live-clock"><i class="ri-time-line"></i> <strong id="liveClock">--:--:--</strong> WIB</span>
       </div>
       <div class="hero-btns reveal">
         <a href="#projects" class="btn btn-primary">View Projects <i class="ri-arrow-right-line"></i></a>
@@ -1750,7 +1833,7 @@
             </div>
             <i class="ri-arrow-right-up-line arr"></i>
           </a>
-          <a href="mailto:reziichsan@gmail.com" target="_blank" class="clink">
+          <a href="mailto:reziichsan@gmail.com" target="_blank" class="clink" id="emailLink">
             <i class="ri-mail-line"></i>
             <div class="clink-text">
               <strong>Email Address</strong>
@@ -1794,8 +1877,13 @@
 
   <!-- ── BACK TO TOP ────────────────────────── -->
   <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 50 50"><circle id="backToTopRing" cx="25" cy="25" r="22"></circle></svg>
     <i class="ri-arrow-up-line"></i>
   </button>
+
+  <!-- ── TOASTS & CONFETTI ─────────────────── -->
+  <div id="toastStack" aria-live="polite"></div>
+  <canvas id="confettiCanvas"></canvas>
 
   <!-- ── FOOTER ─────────────────────────────── -->
   <footer class="footer">
@@ -1963,6 +2051,146 @@
       setTimeout(typeRole, deleting ? 35 : 55);
     }
     typeRole();
+
+    /* ── TOAST SYSTEM ─────────────────────────────────── */
+    function showToast(message, icon = 'ri-checkbox-circle-line') {
+      const stack = document.getElementById('toastStack');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<i class="${icon}"></i><span>${message}</span>`;
+      stack.appendChild(toast);
+      setTimeout(() => toast.remove(), 2900);
+    }
+
+    /* ── COPY EMAIL TO CLIPBOARD ──────────────────────── */
+    const emailLink = document.getElementById('emailLink');
+    if (emailLink) {
+      emailLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        const email = 'reziichsan@gmail.com';
+        navigator.clipboard.writeText(email).then(() => {
+          emailLink.classList.add('copied');
+          showToast('Email copied — ' + email, 'ri-file-copy-line');
+          setTimeout(() => emailLink.classList.remove('copied'), 1200);
+        }).catch(() => { window.location.href = 'mailto:' + email; });
+      });
+    }
+
+    /* ── LIVE CLOCK (Asia/Jakarta, WIB) ───────────────── */
+    const liveClockEl = document.getElementById('liveClock');
+    function tickClock() {
+      if (!liveClockEl) return;
+      const now = new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Jakarta', hour12: false });
+      liveClockEl.textContent = now;
+    }
+    tickClock();
+    setInterval(tickClock, 1000);
+
+    /* ── MAGNETIC BUTTONS ──────────────────────────────── */
+    if (window.matchMedia('(min-width: 821px)').matches) {
+      document.querySelectorAll('.btn-primary, .btn-outline').forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+          const r = btn.getBoundingClientRect();
+          const x = e.clientX - r.left - r.width / 2;
+          const y = e.clientY - r.top - r.height / 2;
+          btn.style.transform = `translate(${x * 0.18}px, ${y * 0.35}px)`;
+        });
+        btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+      });
+    }
+
+    /* ── 3D TILT ON CARDS (desktop only) ──────────────── */
+    if (window.matchMedia('(min-width: 821px)').matches) {
+      document.querySelectorAll('.pcard, .skill-card, .ccard, .rolefit-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transform = `perspective(700px) rotateX(${py * -6}deg) rotateY(${px * 6}deg) translateY(-3px)`;
+        });
+        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+      });
+    }
+
+    /* ── BACK-TO-TOP RING PROGRESS ────────────────────── */
+    const backToTopRing = document.getElementById('backToTopRing');
+    const ringCircumference = 2 * Math.PI * 22;
+    if (backToTopRing) backToTopRing.style.strokeDasharray = ringCircumference;
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
+      if (backToTopRing) {
+        backToTopRing.style.strokeDashoffset = ringCircumference * (1 - scrolled);
+      }
+    });
+
+    /* ── CONFETTI BURST (used on CV download + easter egg) ── */
+    const confettiCanvas = document.getElementById('confettiCanvas');
+    const confettiCtx = confettiCanvas.getContext('2d');
+    function resizeConfettiCanvas() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    }
+    resizeConfettiCanvas();
+    window.addEventListener('resize', resizeConfettiCanvas);
+
+    function burstConfetti(originX = window.innerWidth / 2, originY = window.innerHeight / 3, count = 70) {
+      const colors = ['#d1a366', '#e8c48a', '#4ade80', '#ede8e0'];
+      const particles = Array.from({ length: count }, () => ({
+        x: originX, y: originY,
+        vx: (Math.random() - 0.5) * 11,
+        vy: Math.random() * -11 - 3,
+        size: Math.random() * 5 + 3,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 360,
+        vr: (Math.random() - 0.5) * 12,
+        life: 1
+      }));
+      let frame;
+      function step() {
+        confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        let alive = false;
+        particles.forEach(p => {
+          if (p.life <= 0) return;
+          alive = true;
+          p.vy += 0.35;
+          p.x += p.vx; p.y += p.vy; p.rotation += p.vr;
+          p.life -= 0.012;
+          confettiCtx.save();
+          confettiCtx.translate(p.x, p.y);
+          confettiCtx.rotate(p.rotation * Math.PI / 180);
+          confettiCtx.globalAlpha = Math.max(p.life, 0);
+          confettiCtx.fillStyle = p.color;
+          confettiCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          confettiCtx.restore();
+        });
+        if (alive) { frame = requestAnimationFrame(step); }
+        else { confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height); }
+      }
+      cancelAnimationFrame(frame);
+      step();
+    }
+
+    /* Trigger a small confetti + toast when CV is downloaded */
+    document.querySelectorAll('a[download]').forEach(a => {
+      a.addEventListener('click', () => {
+        const r = a.getBoundingClientRect();
+        burstConfetti(r.left + r.width / 2, r.top, 50);
+        showToast('Thanks for downloading the CV!', 'ri-download-2-line');
+      });
+    });
+
+    /* ── KONAMI CODE EASTER EGG ────────────────────────── */
+    const konamiSeq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    let konamiPos = 0;
+    window.addEventListener('keydown', (e) => {
+      konamiPos = (e.key === konamiSeq[konamiPos]) ? konamiPos + 1 : (e.key === konamiSeq[0] ? 1 : 0);
+      if (konamiPos === konamiSeq.length) {
+        konamiPos = 0;
+        burstConfetti(window.innerWidth / 2, window.innerHeight / 2, 160);
+        showToast('Easter egg unlocked! Thanks for exploring 🎉', 'ri-sparkling-2-line');
+      }
+    });
   </script>
 </body>
 </html>
