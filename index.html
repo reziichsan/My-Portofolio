@@ -1113,9 +1113,15 @@
       border-top: 1px solid var(--border);
     }
 
-    /* ── SCROLL REVEAL INIT ──────────────────────────── */
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
+    /* ── SCROLL REVEAL INIT (3D rotate-in) ───────────── */
+    .reveal {
+      opacity: 0;
+      transform: perspective(1000px) translateY(30px) rotateX(8deg);
+      transform-origin: top center;
+      transition: opacity 0.75s cubic-bezier(.2,.7,.2,1), transform 0.75s cubic-bezier(.2,.7,.2,1);
+      will-change: transform, opacity;
+    }
+    .reveal.visible { opacity: 1; transform: perspective(1000px) translateY(0) rotateX(0deg); }
 
     /* ── SCROLL PROGRESS BAR ─────────────────────────── */
     #scrollProgress {
@@ -1339,10 +1345,36 @@
     .btn-primary, .btn-outline { will-change: transform; }
 
     /* ── TILT-READY CARDS ──────────────────────────────── */
-    .pcard, .skill-card, .ccard, .rolefit-card {
+    .pcard, .skill-card, .ccard, .rolefit-card, .tl-card, .about-imgframe, .hero-img-inner {
       transform-style: preserve-3d;
       will-change: transform;
+      transition: transform 0.35s cubic-bezier(.2,.7,.2,1), box-shadow 0.35s ease, border-color 0.25s ease, background 0.25s ease;
     }
+
+    /* ── IDLE FLOAT / PARALLAX-DEPTH DECOR ───────────────── */
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-9px) rotate(3deg); }
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+    .hero-img-ring { animation: floatY 4.5s ease-in-out infinite; }
+    .hero-img-badge { animation: floatSlow 5s ease-in-out infinite; animation-delay: 0.4s; }
+    .hero-blob.one { animation: floatSlow 9s ease-in-out infinite; }
+    .hero-blob.two { animation: floatSlow 11s ease-in-out infinite reverse; }
+
+    /* ── HERO PARTICLE FIELD (depth dots) ────────────────── */
+    #heroParticles {
+      position: absolute;
+      inset: -2rem -1.5rem auto -1.5rem;
+      height: 640px;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+    @media (max-width: 820px) { #heroParticles { display: none; } }
 
     /* ── COPIED STATE FOR EMAIL LINK ─────────────────────── */
     .clink.copied { border-color: var(--gold); background: var(--gold-dim); }
@@ -1423,6 +1455,7 @@
 
   <!-- ── HERO ───────────────────────────────── -->
   <section class="hero" id="home">
+    <canvas id="heroParticles"></canvas>
     <div class="hero-blob one"></div>
     <div class="hero-blob two"></div>
     <div class="hero-left">
@@ -1854,7 +1887,7 @@
             <i class="ri-git-branch-line"></i>
             <div class="clink-text">
               <strong>GitHub Profile</strong>
-              <span>github.com/reziichsan</span>
+              <span>https://github.com/reziichsan</span>
             </div>
             <i class="ri-arrow-right-up-line arr"></i>
           </a>
@@ -2108,18 +2141,109 @@
       });
     }
 
-    /* ── 3D TILT ON CARDS (desktop only) ──────────────── */
+    /* ── 3D TILT ON CARDS (desktop only, with dynamic depth shadow) ──────────────── */
     if (window.matchMedia('(min-width: 821px)').matches) {
-      document.querySelectorAll('.pcard, .skill-card, .ccard, .rolefit-card').forEach(card => {
+      document.querySelectorAll('.pcard, .skill-card, .ccard, .rolefit-card, .tl-card').forEach(card => {
         card.addEventListener('mousemove', (e) => {
           const r = card.getBoundingClientRect();
           const px = (e.clientX - r.left) / r.width - 0.5;
           const py = (e.clientY - r.top) / r.height - 0.5;
-          card.style.transform = `perspective(700px) rotateX(${py * -6}deg) rotateY(${px * 6}deg) translateY(-3px)`;
+          card.style.transform = `perspective(800px) rotateX(${py * -7}deg) rotateY(${px * 7}deg) translateY(-4px) translateZ(6px)`;
+          card.style.boxShadow = `${-px * 26}px ${18 - py * 14}px 42px rgba(0,0,0,0.42), 0 0 0 1px rgba(209,163,102,${0.06 + Math.abs(px) * 0.06})`;
         });
-        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+        card.addEventListener('mouseleave', () => { card.style.transform = ''; card.style.boxShadow = ''; });
       });
+
+      /* Hero portrait: deeper 3D tilt + gold rim-light that tracks the cursor */
+      const heroImgInner = document.querySelector('.hero-img-inner');
+      if (heroImgInner) {
+        heroImgInner.addEventListener('mousemove', (e) => {
+          const r = heroImgInner.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          heroImgInner.style.transform = `perspective(900px) rotateX(${py * -10}deg) rotateY(${px * 12}deg) translateZ(10px)`;
+        });
+        heroImgInner.addEventListener('mouseleave', () => { heroImgInner.style.transform = ''; });
+      }
+
+      /* About portrait: gentler 3D tilt */
+      const aboutFrame = document.querySelector('.about-imgframe');
+      if (aboutFrame) {
+        aboutFrame.addEventListener('mousemove', (e) => {
+          const r = aboutFrame.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          aboutFrame.style.transform = `perspective(900px) rotateX(${py * -6}deg) rotateY(${px * 6}deg) translateZ(4px)`;
+        });
+        aboutFrame.addEventListener('mouseleave', () => { aboutFrame.style.transform = ''; });
+      }
     }
+
+    /* ── HERO DEPTH-FIELD PARTICLES (lightweight 3D-style parallax dots) ── */
+    (function heroParticleField() {
+      const canvas = document.getElementById('heroParticles');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const heroSection = document.getElementById('home');
+      let W, H, dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let particles = [];
+      let mouseX = 0.5, mouseY = 0.3;
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        W = rect.width; H = rect.height;
+        canvas.width = W * dpr; canvas.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function initParticles() {
+        const count = window.innerWidth < 1200 ? 34 : 52;
+        particles = Array.from({ length: count }, () => ({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          z: Math.random(),                 // depth 0 (far) -> 1 (near)
+          r: Math.random() * 1.6 + 0.6,
+          driftX: (Math.random() - 0.5) * 0.12,
+          driftY: (Math.random() - 0.5) * 0.12,
+          twinkle: Math.random() * Math.PI * 2
+        }));
+      }
+
+      resize();
+      initParticles();
+      window.addEventListener('resize', () => { resize(); initParticles(); });
+
+      if (window.matchMedia('(min-width: 821px)').matches) {
+        heroSection.addEventListener('mousemove', (e) => {
+          const r = heroSection.getBoundingClientRect();
+          mouseX = (e.clientX - r.left) / r.width;
+          mouseY = (e.clientY - r.top) / r.height;
+        });
+      }
+
+      let t = 0;
+      function draw() {
+        t += 0.016;
+        ctx.clearRect(0, 0, W, H);
+        const parX = (mouseX - 0.5);
+        const parY = (mouseY - 0.5);
+        particles.forEach(p => {
+          p.x += p.driftX; p.y += p.driftY;
+          if (p.x < -10) p.x = W + 10; if (p.x > W + 10) p.x = -10;
+          if (p.y < -10) p.y = H + 10; if (p.y > H + 10) p.y = -10;
+          const depth = 0.3 + p.z * 1.4;             // parallax strength by depth
+          const dx = p.x + parX * 26 * depth;
+          const dy = p.y + parY * 18 * depth;
+          const twinkle = 0.55 + Math.sin(t * 1.4 + p.twinkle) * 0.35;
+          ctx.beginPath();
+          ctx.arc(dx, dy, p.r * (0.6 + p.z * 0.8), 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(209,163,102,${(0.16 + p.z * 0.32) * twinkle})`;
+          ctx.fill();
+        });
+        requestAnimationFrame(draw);
+      }
+      requestAnimationFrame(draw);
+    })();
 
     /* ── BACK-TO-TOP RING PROGRESS ────────────────────── */
     const backToTopRing = document.getElementById('backToTopRing');
