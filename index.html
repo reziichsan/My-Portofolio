@@ -1390,7 +1390,7 @@
     .btn-primary, .btn-outline { will-change: transform; }
 
     /* ── TILT-READY CARDS ──────────────────────────────── */
-    .pcard, .skill-card, .ccard, .rolefit-card, .tl-card, .about-imgframe, .hero-img-inner {
+    .pcard, .skill-card, .ccard, .rolefit-card, .about-imgframe, .hero-img-inner {
       transform-style: preserve-3d;
       will-change: transform;
       transition: transform 0.35s cubic-bezier(.2,.7,.2,1), box-shadow 0.35s ease, border-color 0.25s ease, background 0.25s ease;
@@ -2190,7 +2190,7 @@
 
     /* ── 3D TILT ON CARDS (desktop only, with dynamic depth shadow) ──────────────── */
     if (window.matchMedia('(min-width: 821px)').matches) {
-      document.querySelectorAll('.pcard, .skill-card, .ccard, .rolefit-card, .tl-card').forEach(card => {
+      document.querySelectorAll('.pcard, .skill-card, .ccard, .rolefit-card').forEach(card => {
         card.addEventListener('mousemove', (e) => {
           const r = card.getBoundingClientRect();
           const px = (e.clientX - r.left) / r.width - 0.5;
