@@ -51,7 +51,7 @@
       --text:        #ede8e0;
       --muted:       #8a8680;
       --green:       #4ade80;
-      --mono:         'JetBrains Mono', monospace;
+      --mono:          'JetBrains Mono', monospace;
       --max:         1140px;
       --r:           14px;
       --r-sm:        8px;
@@ -619,6 +619,51 @@
       background: var(--gold-dim);
       color: var(--gold);
       border: 1px solid rgba(209,163,102,0.2);
+    }
+
+    /* ── TIMELINE ACTIONS (Download Buttons) ─────────── */
+    .tl-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      margin-top: 0.75rem;
+    }
+    .btn-doc {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.15rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border-radius: 99px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .btn-doc i {
+      font-size: 1rem;
+      color: var(--gold);
+      transition: color 0.25s ease;
+    }
+    .btn-doc:hover {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(209, 163, 102, 0.15);
+    }
+    /* Responsif: Menjadi full-width di layar HP kecil */
+    @media (max-width: 480px) {
+      .tl-actions {
+        flex-direction: column;
+      }
+      .btn-doc {
+        width: 100%;
+      }
     }
 
     /* ── SKILLS ──────────────────────────────────────── */
@@ -1611,7 +1656,6 @@
         </div>
 
         <!-- Education column -->
-       <!-- Education column -->
         <div class="reveal">
           <div class="exp-col-head">
             <div class="exp-col-icon"><i class="ri-graduation-cap-line"></i></div>
@@ -1627,14 +1671,13 @@
                 <p class="tl-company"><i class="ri-map-pin-line"></i> Telkom University · Bandung, Indonesia</p>
                 <p class="tl-desc">Comprehensive coursework in network architecture, mobile framework engineering, database management systems, OOP, corporate cybersecurity structures, and agile project methodologies.</p>
                 
-                <!-- Tambahan Tombol Download SKL -->
-                <!-- Tambahan Tombol Download SKL & Transkrip -->
-                <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.2rem;">
-                  <a href="SKL.pdf" class="btn btn-outline" download="Rezi-Ichsannur-Arsyi-SKL.pdf" style="padding: 0.45rem 1.1rem; font-size: 0.78rem;">
-                    Download SKL <i class="ri-download-2-line"></i>
+                <!-- Tombol Download SKL & Transkrip (Clean Code) -->
+                <div class="tl-actions">
+                  <a href="SKL.pdf" class="btn-doc" download="Rezi-Ichsannur-Arsyi-SKL.pdf">
+                    <i class="ri-file-text-line"></i> Download SKL
                   </a>
-                  <a href="Transkrip.pdf" class="btn btn-outline" download="Rezi-Ichsannur-Arsyi-Transkrip.pdf" style="padding: 0.45rem 1.1rem; font-size: 0.78rem;">
-                    Download Transkrip Nilai <i class="ri-download-2-line"></i>
+                  <a href="Transkrip.pdf" class="btn-doc" download="Rezi-Ichsannur-Arsyi-Transkrip.pdf">
+                    <i class="ri-file-paper-2-line"></i> Download Transkrip
                   </a>
                 </div>
 
@@ -2205,7 +2248,7 @@
         particles = Array.from({ length: count }, () => ({
           x: Math.random() * W,
           y: Math.random() * H,
-          z: Math.random(),                 // depth 0 (far) -> 1 (near)
+          z: Math.random(),                  // depth 0 (far) -> 1 (near)
           r: Math.random() * 1.6 + 0.6,
           driftX: (Math.random() - 0.5) * 0.12,
           driftY: (Math.random() - 0.5) * 0.12,
@@ -2235,7 +2278,7 @@
           p.x += p.driftX; p.y += p.driftY;
           if (p.x < -10) p.x = W + 10; if (p.x > W + 10) p.x = -10;
           if (p.y < -10) p.y = H + 10; if (p.y > H + 10) p.y = -10;
-          const depth = 0.3 + p.z * 1.4;             // parallax strength by depth
+          const depth = 0.3 + p.z * 1.4;              // parallax strength by depth
           const dx = p.x + parX * 26 * depth;
           const dy = p.y + parY * 18 * depth;
           const twinkle = 0.55 + Math.sin(t * 1.4 + p.twinkle) * 0.35;
@@ -2313,7 +2356,7 @@
       a.addEventListener('click', () => {
         const r = a.getBoundingClientRect();
         burstConfetti(r.left + r.width / 2, r.top, 50);
-        showToast('Thanks for downloading the CV!', 'ri-download-2-line');
+        showToast('Thanks for downloading!', 'ri-download-2-line');
       });
     });
 
